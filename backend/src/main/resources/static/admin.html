@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>智阅教育 - 管理后台</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;background:#f0f2f5;min-height:100vh}
+.login-box{max-width:420px;margin:120px auto 0;padding:40px;background:#fff;border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,0.08)}
+.login-box h1{font-size:28px;font-weight:800;margin-bottom:8px;color:#1e293b}
+.login-box p{color:#94a3b8;margin-bottom:28px;font-size:14px}
+.login-box input{width:100%;height:48px;border:2px solid #e2e8f0;border-radius:10px;padding:0 16px;font-size:16px;margin-bottom:16px;outline:none;transition:border-color .2s}
+.login-box input:focus{border-color:#2563eb}
+.login-box button{width:100%;height:52px;background:linear-gradient(135deg,#1d4ed8,#38bdf8);color:#fff;border:none;border-radius:12px;font-size:18px;font-weight:700;cursor:pointer;transition:all .2s}
+.login-box button:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(37,99,235,.25)}
+.login-box button:active{transform:scale(.98)}
+.login-box .hint{margin-top:14px;font-size:13px;color:#94a3b8;text-align:center}
+.dashboard{display:none;max-width:1000px;margin:0 auto;padding:32px 20px}
+.dashboard.active,.login-box.active{display:block}
+.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;padding:0 8px}
+.header h1{font-size:24px;font-weight:800;color:#1e293b}
+.header button{height:40px;padding:0 20px;border:2px solid #e2e8f0;background:#fff;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;color:#64748b}
+.header button:hover{background:#f8fafc}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px}
+.stat{background:#fff;padding:24px;border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,0.04);text-align:center}
+.stat .n{font-size:42px;font-weight:800;color:#2563eb}
+.stat .l{font-size:13px;color:#94a3b8;margin-top:6px}
+.generate-panel{background:#fff;padding:28px;border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,0.04);margin-bottom:24px}
+.generate-panel h2{font-size:18px;font-weight:700;margin-bottom:20px;color:#1e293b}
+.generate-panel .row{display:flex;gap:12px;align-items:center}
+.generate-panel select,.generate-panel input{height:48px;border:2px solid #e2e8f0;border-radius:10px;padding:0 16px;font-size:15px;outline:none}
+.generate-panel select{width:180px}
+.generate-panel input{width:120px;text-align:center}
+.generate-panel .btn-gen{height:48px;padding:0 32px;background:linear-gradient(135deg,#059669,#34d399);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer}
+.generate-panel .btn-gen:hover{box-shadow:0 6px 20px rgba(5,150,105,.2)}
+.keys-panel{background:#fff;padding:28px;border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,0.04);margin-bottom:24px;display:none}
+.keys-panel h2{font-size:18px;font-weight:700;margin-bottom:16px;color:#1e293b}
+.keys-panel .k-row{display:flex;gap:10px;align-items:center;margin-bottom:12px}
+.keys-panel .btn-copy{height:40px;padding:0 20px;background:#2563eb;color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer}
+.key-grid{margin-top:12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.key-item{background:#1e293b;color:#38bdf8;padding:12px 16px;border-radius:10px;font-family:monospace;font-size:14px;letter-spacing:1px}
+.card-table{background:#fff;padding:28px;border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,0.04)}
+.card-table h2{font-size:18px;font-weight:700;margin-bottom:20px;color:#1e293b}
+.card-table table{width:100%;border-collapse:collapse}
+.card-table th{text-align:left;padding:12px 16px;border-bottom:2px solid #f1f5f9;font-size:13px;color:#94a3b8;font-weight:600}
+.card-table td{padding:12px 16px;border-bottom:1px solid #f8fafc;font-size:14px;color:#334155}
+.card-table code{background:#f1f5f9;padding:4px 10px;border-radius:6px;color:#1e293b}
+.tag{padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600}
+.tag-unused{background:#dbeafe;color:#2563eb}
+.tag-used{background:#d1fae5;color:#065f46}
+.toast{position:fixed;top:24px;left:50%;transform:translateX(-50%);background:#1e293b;color:#fff;padding:14px 28px;border-radius:12px;font-size:14px;font-weight:600;z-index:999;opacity:0;transition:opacity .3s}
+.toast.show{opacity:1}
+</style>
+</head>
+<body>
+
+<div id="login" class="login-box active">
+  <h1>智阅教育</h1>
+  <p>管理后台 — 卡密生成与管理</p>
+  <input id="loginUser" placeholder="管理员账号" value="admin" autocomplete="username">
+  <input id="loginPass" type="password" placeholder="管理员密码" value="admin123" autocomplete="current-password">
+  <button onclick="doLogin()">登录后台</button>
+  <p class="hint">默认 admin / admin123</p>
+</div>
+
+<div id="dash" class="dashboard">
+  <div class="header">
+    <h1>📦 卡密管理</h1>
+    <button onclick="doLogout()">退出登录</button>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n" id="stTotal">0</div><div class="l">总卡密数</div></div>
+    <div class="stat"><div class="n" id="stUnused">0</div><div class="l">未使用</div></div>
+    <div class="stat"><div class="n" id="stUsed">0</div><div class="l">已使用</div></div>
+  </div>
+
+  <div class="generate-panel">
+    <h2>🎫 生成卡密</h2>
+    <div class="row">
+      <select id="genAmount">
+        <option value="500">500次额度</option>
+        <option value="1000">1000次额度</option>
+        <option value="2000">2000次额度</option>
+      </select>
+      <input type="number" id="genCount" value="1" min="1" max="50" placeholder="数量">
+      <button class="btn-gen" onclick="doGenerate()">生成卡密</button>
+    </div>
+  </div>
+
+  <div class="keys-panel" id="keysPanel">
+    <div class="k-row">
+      <h2>✅ 刚生成的卡密</h2>
+      <button class="btn-copy" onclick="copyKeys()">📋 复制全部</button>
+    </div>
+    <div class="key-grid" id="keyGrid"></div>
+  </div>
+
+  <div class="card-table">
+    <h2>📋 卡密列表</h2>
+    <table>
+      <thead><tr><th>卡密</th><th>额度</th><th>状态</th><th>使用教师ID</th><th>创建时间</th><th>使用时间</th></tr></thead>
+      <tbody id="cardList"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const API = 'http://121.196.197.223:8099/api';
+let token = '';
+
+async function api(path, opts={}) {
+  const res = await fetch(API + path, {
+    method: opts.method || 'GET',
+    headers: {'Content-Type':'application/json', Authorization: token ? 'Bearer '+token : ''},
+    body: opts.body ? JSON.stringify(opts.body) : undefined
+  });
+  const data = await res.json();
+  if (!res.ok || data.code !== 200) throw new Error(data.message || '请求失败');
+  return data.data;
+}
+
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+async function doLogin() {
+  try {
+    const data = await api('/admin/login', {method:'POST', body:{
+      username: document.getElementById('loginUser').value,
+      password: document.getElementById('loginPass').value
+    }});
+    token = data.token;
+    document.getElementById('login').classList.remove('active');
+    document.getElementById('dash').classList.add('active');
+    toast('登录成功');
+    loadCards();
+  } catch(e) { toast(e.message); }
+}
+
+function doLogout() {
+  token = '';
+  document.getElementById('dash').classList.remove('active');
+  document.getElementById('login').classList.add('active');
+}
+
+async function doGenerate() {
+  const amount = Number(document.getElementById('genAmount').value);
+  const count = Number(document.getElementById('genCount').value);
+  try {
+    const data = await api('/admin/cards/generate', {method:'POST', body:{amount, count}});
+    const panel = document.getElementById('keysPanel');
+    const grid = document.getElementById('keyGrid');
+    grid.innerHTML = data.keys.map(k => `<div class="key-item">${k}</div>`).join('');
+    panel.style.display = 'block';
+    toast(`生成了 ${count} 个${amount}次卡密`);
+    loadCards();
+  } catch(e) { toast(e.message); }
+}
+
+function copyKeys() {
+  const items = document.querySelectorAll('.key-item');
+  const keys = Array.from(items).map(el => el.textContent);
+  navigator.clipboard.writeText(keys.join('\n')).then(() => toast('已复制 '+keys.length+' 个卡密'));
+}
+
+async function loadCards() {
+  try {
+    const cards = await api('/admin/cards');
+    const total = cards.length;
+    const unused = cards.filter(c => c.status === 'UNUSED').length;
+    document.getElementById('stTotal').textContent = total;
+    document.getElementById('stUnused').textContent = unused;
+    document.getElementById('stUsed').textContent = total - unused;
+    document.getElementById('cardList').innerHTML = cards.map(c => `<tr>
+      <td><code>${c.cardKey}</code></td>
+      <td>${c.quotaAmount}次</td>
+      <td><span class="tag ${c.status==='UNUSED'?'tag-unused':'tag-used'}">${c.status==='UNUSED'?'未使用':'已使用'}</span></td>
+      <td>${c.usedByTeacherId || '-'}</td>
+      <td>${c.createdAt || '-'}</td>
+      <td>${c.usedAt || '-'}</td>
+    </tr>`).join('');
+  } catch(e) { toast(e.message); }
+}
+
+document.getElementById('loginPass').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+</script>
+</body>
+</html>

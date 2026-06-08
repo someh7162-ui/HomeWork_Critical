@@ -1,0 +1,140 @@
+{
+    "easycom": {
+        "autoscan": true,
+        "custom": {}
+    },
+    "pages": [
+        {
+            "path": "pages/login/login",
+            "style": {
+                "navigationBarTitleText": "登录",
+                "navigationStyle": "custom"
+            }
+        },
+        {
+            "path": "pages/home/home",
+            "style": {
+                "navigationBarTitleText": "作业列表"
+            }
+        },
+        {
+            "path": "pages/student-portal/assignments",
+            "style": {
+                "navigationBarTitleText": "我的作业",
+                "enablePullDownRefresh": true
+            }
+        },
+        {
+            "path": "pages/student-portal/result",
+            "style": {
+                "navigationBarTitleText": "批改结果"
+            }
+        },
+        {
+            "path": "pages/assignment/list",
+            "style": {
+                "navigationBarTitleText": "作业列表"
+            }
+        },
+        {
+            "path": "pages/assignment/create",
+            "style": {
+                "navigationBarTitleText": "创建作业"
+            }
+        },
+        {
+            "path": "pages/assignment/detail",
+            "style": {
+                "navigationBarTitleText": "作业详情"
+            }
+        },
+        {
+            "path": "pages/student/list",
+            "style": {
+                "navigationBarTitleText": "学生管理"
+            }
+        },
+        {
+            "path": "pages/student/add",
+            "style": {
+                "navigationBarTitleText": "添加学生"
+            }
+        },
+        {
+            "path": "pages/student/roster",
+            "style": {
+                "navigationBarTitleText": "导入花名册"
+            }
+        },
+        {
+            "path": "pages/student/class-create",
+            "style": {
+                "navigationBarTitleText": "新建班级"
+            }
+        },
+        {
+            "path": "pages/grading/capture",
+            "style": {
+                "navigationBarTitleText": "批改作文"
+            }
+        },
+        {
+            "path": "pages/grading/batch",
+            "style": {
+                "navigationBarTitleText": "批量批改"
+            }
+        },
+        {
+            "path": "pages/grading/result",
+            "style": {
+                "navigationBarTitleText": "批改结果"
+            }
+        },
+        {
+            "path": "pages/grading/list",
+            "style": {
+                "navigationBarTitleText": "批改记录"
+            }
+        },
+        {
+            "path": "pages/grading/stats",
+            "style": {
+                "navigationBarTitleText": "班级统计"
+            }
+        },
+        {
+            "path": "pages/user/settings",
+            "style": {
+                "navigationBarTitleText": "设置"
+            }
+        },
+        {
+            "path": "pages/feedback/feedback",
+            "style": {
+                "navigationBarTitleText": "体验反馈"
+            }
+        }
+    ],
+    "globalStyle": {
+        "navigationBarTextStyle": "white",
+        "navigationBarTitleText": "墨知智评",
+        "navigationBarBackgroundColor": "#4A90D9",
+        "backgroundColor": "#F5F6FA"
+    },
+    "tabBar": {
+        "color": "#999999",
+        "selectedColor": "#4A90D9",
+        "backgroundColor": "#FFFFFF",
+        "borderStyle": "black",
+        "list": [
+            {
+                "pagePath": "pages/home/home",
+                "text": "作业"
+            },
+            {
+                "pagePath": "pages/student/list",
+                "text": "学生"
+            }
+        ]
+    }
+}

@@ -1,0 +1,64 @@
+﻿server:
+  port: 8099
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/paper_critical?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:}
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 100MB
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+
+# JWT 配置
+jwt:
+  secret: ${JWT_SECRET:change-me-in-production}
+  expiration: 2592000000
+
+# 文件上传路径
+upload:
+  path: ./uploads/essays/
+
+# SimpleTex OCR 配置 (APP 鉴权方式)
+ocr:
+  app-id: ${OCR_APP_ID:}
+  app-secret: ${OCR_APP_SECRET:}
+  api-url: https://server.simpletex.cn/api/simpletex_ocr
+
+# MinerU 文档解析配置。API Token 通过服务器环境变量注入，避免写入代码仓库。
+mineru:
+  api-key: ${MINERU_API_KEY:}
+  base-url: ${MINERU_BASE_URL:https://mineru.net/api/v4}
+  model-version: ${MINERU_MODEL_VERSION:pipeline}
+
+# AI评分配置（支持多 Provider 切换）
+ai:
+  provider: mimo
+  mimo:
+    api-key: ${MIMO_API_KEY:}
+    api-url: https://token-plan-cn.xiaomimimo.com/v1/chat/completions
+    model: mimo-v2-pro
+    vision-model: mimo-v2-omni
+  qwen:
+    api-key: ${QWEN_API_KEY:}
+    api-url: https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions
+    model: qwen-vl-plus
+
+# 管理员配置（BCrypt hash of admin password, generate with: https://bcrypt.online）
+admin:
+  password-hash: ${ADMIN_PASSWORD_HASH:$2a$10$o.evsLnKPFWvcWD2fXRZeeZozHz2VS2NnMsQhKs.hjMqNVIGwfIAm}
+
+# 微信小程序配置
+wechat:
+  appid: ${WECHAT_APPID:}
+  secret: ${WECHAT_APP_SECRET:}

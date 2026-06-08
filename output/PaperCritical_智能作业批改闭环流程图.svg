@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1120" viewBox="0 0 1600 1120">
+  <title>PaperCritical 智能作业批改闭环流程图</title>
+  <desc>教师发布作业，学生自主提交或教师代为上传，AI 完成识别、批改和原图批注，教师确认并查看班级统计，学生查看结果。</desc>
+  <defs>
+    <marker id="arrow-blue" markerWidth="10" markerHeight="10" refX="9" refY="3.5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,3.5 L0,7 Z" fill="#315B91"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="10" markerHeight="10" refX="9" refY="3.5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,3.5 L0,7 Z" fill="#3E765D"/>
+    </marker>
+    <marker id="arrow-gray" markerWidth="10" markerHeight="10" refX="9" refY="3.5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,3.5 L0,7 Z" fill="#566270"/>
+    </marker>
+    <style>
+      text { font-family: SimSun, "宋体", "Times New Roman", serif; font-size: 14px; fill: #1F2933; }
+      .en { font-family: "Times New Roman", SimSun, "宋体", serif; }
+      .title { font-family: SimSun, "宋体", serif; font-size: 18px; font-weight: 700; }
+      .lane-label { font-family: SimSun, "宋体", serif; font-size: 16px; font-weight: 700; fill: #FFFFFF; }
+      .node-title { font-family: SimSun, "宋体", serif; font-size: 14px; font-weight: 700; text-anchor: middle; }
+      .node-detail { font-family: SimSun, "宋体", serif; font-size: 13px; text-anchor: middle; fill: #566270; }
+      .small { font-family: SimSun, "宋体", serif; font-size: 12px; fill: #566270; }
+      .note { font-family: SimSun, "宋体", serif; font-size: 13px; fill: #3C4858; }
+      .caption { font-family: SimSun, "宋体", serif; font-size: 14px; text-anchor: middle; }
+      .teacher-node { fill: #FFFFFF; stroke: #315B91; stroke-width: 1.6; }
+      .student-node { fill: #FFFFFF; stroke: #3E765D; stroke-width: 1.6; }
+      .system-node { fill: #FFFFFF; stroke: #7A5C24; stroke-width: 1.6; }
+      .result-node { fill: #FFF8F6; stroke: #B94A48; stroke-width: 1.6; }
+      .teacher-arrow { fill: none; stroke: #315B91; stroke-width: 1.8; marker-end: url(#arrow-blue); }
+      .student-arrow { fill: none; stroke: #3E765D; stroke-width: 1.8; marker-end: url(#arrow-green); }
+      .system-arrow { fill: none; stroke: #566270; stroke-width: 1.8; marker-end: url(#arrow-gray); }
+      .dash-arrow { fill: none; stroke: #566270; stroke-width: 1.6; stroke-dasharray: 7 5; marker-end: url(#arrow-gray); }
+      .divider { stroke: #CDD5DF; stroke-width: 1; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="1120" fill="#FFFFFF"/>
+  <text x="800" y="42" class="title" text-anchor="middle">面向课堂场景的智能作业批改闭环</text>
+  <text x="800" y="68" class="node-detail">覆盖作文与练习册作业，支持学生自主提交和教师代为上传</text>
+
+  <!-- Swimlanes -->
+  <rect x="60" y="110" width="1480" height="230" rx="4" fill="#F7FAFE" stroke="#B9CCE3"/>
+  <rect x="60" y="360" width="1480" height="230" rx="4" fill="#F7FCF9" stroke="#BFD8CB"/>
+  <rect x="60" y="610" width="1480" height="380" rx="4" fill="#FCFAF5" stroke="#D9CDAE"/>
+  <rect x="60" y="110" width="80" height="230" rx="4" fill="#315B91"/>
+  <rect x="60" y="360" width="80" height="230" rx="4" fill="#3E765D"/>
+  <rect x="60" y="610" width="80" height="380" rx="4" fill="#7A5C24"/>
+
+  <text x="100" y="210" class="lane-label" text-anchor="middle">
+    <tspan x="100" dy="0">教</tspan><tspan x="100" dy="24">师</tspan><tspan x="100" dy="24">端</tspan>
+  </text>
+  <text x="100" y="460" class="lane-label" text-anchor="middle">
+    <tspan x="100" dy="0">学</tspan><tspan x="100" dy="24">生</tspan><tspan x="100" dy="24">端</tspan>
+  </text>
+  <text x="100" y="740" class="lane-label" text-anchor="middle">
+    <tspan x="100" dy="0">智</tspan><tspan x="100" dy="24">能</tspan><tspan x="100" dy="24">批</tspan><tspan x="100" dy="24">改</tspan><tspan x="100" dy="24">系</tspan><tspan x="100" dy="24">统</tspan>
+  </text>
+
+  <!-- Teacher lane -->
+  <rect x="180" y="170" width="160" height="92" rx="4" class="teacher-node"/>
+  <text x="260" y="205" class="node-title">创建班级</text>
+  <text x="260" y="229" class="node-detail">分配学生账号</text>
+
+  <rect x="390" y="170" width="188" height="92" rx="4" class="teacher-node"/>
+  <text x="484" y="199" class="node-title">创建并发布作业</text>
+  <text x="484" y="223" class="node-detail">作文 / 练习册</text>
+  <text x="484" y="245" class="node-detail">指定班级与截止时间</text>
+
+  <polygon points="640,216 710,166 780,216 710,266" fill="#FFFFFF" stroke="#315B91" stroke-width="1.6"/>
+  <text x="710" y="211" class="node-title">练习册</text>
+  <text x="710" y="233" class="node-detail">作业？</text>
+
+  <rect x="840" y="145" width="186" height="92" rx="4" class="teacher-node"/>
+  <text x="933" y="180" class="node-title">上传答案页</text>
+  <text x="933" y="204" class="node-detail">设置题号范围与总分</text>
+
+  <rect x="840" y="258" width="186" height="58" rx="4" class="teacher-node"/>
+  <text x="933" y="293" class="node-title">查看提交情况</text>
+
+  <rect x="1100" y="170" width="176" height="92" rx="4" class="teacher-node"/>
+  <text x="1188" y="199" class="node-title">辅助上传</text>
+  <text x="1188" y="223" class="node-detail">为未提交学生</text>
+  <text x="1188" y="245" class="node-detail">代传作业图片</text>
+
+  <rect x="1330" y="170" width="166" height="92" rx="4" class="teacher-node"/>
+  <text x="1413" y="199" class="node-title">确认批改结果</text>
+  <text x="1413" y="223" class="node-detail">复核与调整分数</text>
+  <text x="1413" y="245" class="node-detail">查看班级统计</text>
+
+  <path d="M340 216 H390" class="teacher-arrow"/>
+  <path d="M578 216 H640" class="teacher-arrow"/>
+  <path d="M780 216 H840" class="teacher-arrow"/>
+  <text x="803" y="203" class="small">是</text>
+  <path d="M710 266 V287 H840" class="teacher-arrow"/>
+  <text x="726" y="283" class="small">否</text>
+  <path d="M1026 287 H1070 V216 H1100" class="teacher-arrow"/>
+  <path d="M1276 216 H1330" class="teacher-arrow"/>
+
+  <!-- Student lane -->
+  <rect x="180" y="428" width="160" height="92" rx="4" class="student-node"/>
+  <text x="260" y="463" class="node-title">账号登录</text>
+  <text x="260" y="487" class="node-detail">自动关联所属班级</text>
+
+  <rect x="420" y="428" width="174" height="92" rx="4" class="student-node"/>
+  <text x="507" y="463" class="node-title">接收待办作业</text>
+  <text x="507" y="487" class="node-detail">查看类型与要求</text>
+
+  <rect x="680" y="428" width="188" height="92" rx="4" class="student-node"/>
+  <text x="774" y="457" class="node-title">拍照并自主提交</text>
+  <text x="774" y="481" class="node-detail">支持多页练习册图片</text>
+  <text x="774" y="503" class="node-detail">支持作文原图上传</text>
+
+  <rect x="970" y="428" width="174" height="92" rx="4" class="student-node"/>
+  <text x="1057" y="463" class="node-title">查看批改进度</text>
+  <text x="1057" y="487" class="node-detail">实时显示“批改中”</text>
+
+  <rect x="1250" y="428" width="210" height="92" rx="4" class="result-node"/>
+  <text x="1355" y="457" class="node-title">查看批改结果</text>
+  <text x="1355" y="481" class="node-detail">分数、反馈与知识点</text>
+  <text x="1355" y="503" class="node-detail">原图红框批注</text>
+
+  <path d="M340 474 H420" class="student-arrow"/>
+  <path d="M594 474 H680" class="student-arrow"/>
+  <path d="M868 474 H970" class="student-arrow"/>
+  <path d="M1144 474 H1250" class="student-arrow"/>
+
+  <!-- System lane -->
+  <rect x="180" y="706" width="174" height="92" rx="4" class="system-node"/>
+  <text x="267" y="741" class="node-title">作业任务下发</text>
+  <text x="267" y="765" class="node-detail">匹配班级与学生</text>
+
+  <rect x="420" y="706" width="174" height="92" rx="4" class="system-node"/>
+  <text x="507" y="741" class="node-title">接收作业图片</text>
+  <text x="507" y="765" class="node-detail">记录提交状态</text>
+
+  <rect x="660" y="706" width="174" height="92" rx="4" class="system-node"/>
+  <text x="747" y="735" class="node-title">图像预处理</text>
+  <text x="747" y="759" class="node-detail">文字识别与版面分析</text>
+  <text x="747" y="781" class="node-detail"><tspan class="en">OCR</tspan> 结构化提取</text>
+
+  <polygon points="906,752 976,702 1046,752 976,802" fill="#FFFFFF" stroke="#7A5C24" stroke-width="1.6"/>
+  <text x="976" y="747" class="node-title">作业</text>
+  <text x="976" y="769" class="node-detail">类型？</text>
+
+  <rect x="1102" y="650" width="194" height="92" rx="4" class="system-node"/>
+  <text x="1199" y="679" class="node-title">作文智能批改</text>
+  <text x="1199" y="703" class="node-detail">语法、表达与结构分析</text>
+  <text x="1199" y="725" class="node-detail">生成修改建议</text>
+
+  <rect x="1102" y="770" width="194" height="92" rx="4" class="system-node"/>
+  <text x="1199" y="799" class="node-title">练习册逐题批改</text>
+  <text x="1199" y="823" class="node-detail">答案比对与逐题评分</text>
+  <text x="1199" y="845" class="node-detail">归纳薄弱知识点</text>
+
+  <rect x="1360" y="706" width="156" height="92" rx="4" class="result-node"/>
+  <text x="1438" y="735" class="node-title">结果结构化</text>
+  <text x="1438" y="759" class="node-detail">分数与错误明细</text>
+  <text x="1438" y="781" class="node-detail">原图坐标批注</text>
+
+  <path d="M354 752 H420" class="system-arrow"/>
+  <path d="M594 752 H660" class="system-arrow"/>
+  <path d="M834 752 H906" class="system-arrow"/>
+  <path d="M1046 752 H1070 V696 H1102" class="system-arrow"/>
+  <text x="1068" y="682" class="small">作文</text>
+  <path d="M976 802 V816 H1102" class="system-arrow"/>
+  <text x="998" y="836" class="small">练习册</text>
+  <path d="M1296 696 H1324 V752 H1360" class="system-arrow"/>
+  <path d="M1296 816 H1324 V752" class="system-arrow"/>
+
+  <!-- Cross-lane relations -->
+  <path d="M484 262 V675 H267 V706" class="dash-arrow"/>
+  <text x="495" y="370" class="small">发布后自动下发</text>
+
+  <path d="M774 520 V650 H507 V706" class="dash-arrow"/>
+  <text x="615" y="640" class="small">学生自主提交</text>
+
+  <path d="M1188 262 V610 H540 V706" class="dash-arrow"/>
+  <text x="998" y="598" class="small">教师代为上传未交学生作业</text>
+
+  <path d="M933 237 V630 H1024 V816 H1102" class="dash-arrow"/>
+  <text x="944" y="620" class="small">解析答案页并生成标准答案</text>
+
+  <path d="M1438 706 V548 H1355 V520" class="dash-arrow"/>
+  <text x="1448" y="602" class="small">结果同步</text>
+
+  <path d="M1438 706 V330 H1413 V262" class="dash-arrow"/>
+  <text x="1451" y="351" class="small">教师复核</text>
+
+  <path d="M1413 262 V316 H1188 V262" class="dash-arrow"/>
+  <text x="1247" y="309" class="small">发现未交学生</text>
+
+  <!-- Feedback loop -->
+  <path d="M1413 170 V128 H484 V170" class="dash-arrow"/>
+  <text x="948" y="123" class="note" text-anchor="middle">依据班级统计识别共性薄弱点，持续优化下一轮教学与作业设计</text>
+
+  <!-- Legend -->
+  <line x1="184" y1="1032" x2="248" y2="1032" class="teacher-arrow"/>
+  <text x="262" y="1037" class="small">端内主要操作流程</text>
+  <line x1="438" y1="1032" x2="502" y2="1032" class="dash-arrow"/>
+  <text x="516" y="1037" class="small">跨端数据流与反馈关系</text>
+  <rect x="772" y="1019" width="44" height="25" rx="3" class="result-node"/>
+  <text x="828" y="1037" class="small">结果输出节点</text>
+
+  <line x1="60" y1="1070" x2="1540" y2="1070" class="divider"/>
+  <text x="800" y="1100" class="caption">图 1  <tspan class="en">PaperCritical</tspan> 智能作业批改闭环流程图</text>
+</svg>

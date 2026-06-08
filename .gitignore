@@ -1,0 +1,47 @@
+# Dependencies
+node_modules/
+
+# Java build outputs
+target/
+backend/target/
+
+# Uni-app and frontend build outputs
+dist/
+unpackage/
+frontend/unpackage/
+admin-frontend/dist/
+
+# Runtime uploads and logs
+uploads/
+backend/uploads/
+logs/
+*.log
+*.err
+hs_err_pid*.log
+backend/hs_err_pid*.log
+
+# Local/private configuration
+.env
+.env.*
+!.env.example
+*.local
+project.private.config.json
+.docs/账号清单.txt
+
+# Packaged artifacts
+*.zip
+*.tgz
+*.tar
+*.tar.gz
+*.apk
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+.hbuilderx/
+.classpath
+.project
+.factorypath
+.settings/
